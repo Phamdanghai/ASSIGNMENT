@@ -1,5 +1,8 @@
 package com.nashtech.assignment.pdh.entities;
 
+
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,8 +45,19 @@ public class Products {
 	@Column(nullable = false)
 	private int proQuantity;
 	
-	@Column
-	private Long categoryId;
+	//@Column
+	//private Long categoryId;
+	
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Categories categories;
+	
+	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)
+	private Set<FeedBack> feedBacks;
+	
+	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)
+	private Set<OrderDetail>orderDetails;
+	
 
 	public Long getProId() {
 		return proId;
@@ -91,13 +107,11 @@ public class Products {
 		this.proQuantity = proQuantity;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
+	/*
+	 * public Long getCategoryId() { return categoryId; }
+	 * 
+	 * public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+	 */
 	
 	
 }

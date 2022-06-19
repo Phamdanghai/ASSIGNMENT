@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -25,9 +27,26 @@ public class FeedBack {
 	@Column
 	private String fbComment;
 	
-	@Column
-	private Long userId;
-	@Column
-	private Long proId;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private Users users;
+	
+	@ManyToOne
+	@JoinColumn(name = "proId")
+	private Products products;
+	
+	
+	public Long getFbId() {
+		return fbId;
+	}
+	public void setFbId(Long fbId) {
+		this.fbId = fbId;
+	}
+	public String getFbComment() {
+		return fbComment;
+	}
+	public void setFbComment(String fbComment) {
+		this.fbComment = fbComment;
+	}
 	
 }

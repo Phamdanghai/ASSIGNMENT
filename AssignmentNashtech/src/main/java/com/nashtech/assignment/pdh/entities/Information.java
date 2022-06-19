@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -30,4 +32,42 @@ public class Information {
 	
 	@Column(length = 300)
 	private String intAddress;
+	
+	@OneToOne
+	@JoinColumn(name = "userId")
+	private Users users;
+
+	public Long getInfId() {
+		return infId;
+	}
+
+	public void setInfId(Long infId) {
+		this.infId = infId;
+	}
+
+	public String getInfFullName() {
+		return infFullName;
+	}
+
+	public void setInfFullName(String infFullName) {
+		this.infFullName = infFullName;
+	}
+
+	public String getInfPhone() {
+		return infPhone;
+	}
+
+	public void setInfPhone(String infPhone) {
+		this.infPhone = infPhone;
+	}
+
+	public String getIntAddress() {
+		return intAddress;
+	}
+
+	public void setIntAddress(String intAddress) {
+		this.intAddress = intAddress;
+	}
+	
+	
 }

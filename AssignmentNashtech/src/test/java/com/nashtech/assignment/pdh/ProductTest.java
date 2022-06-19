@@ -10,7 +10,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import com.nashtech.assignment.pdh.entities.Categories;
+import com.nashtech.assignment.pdh.entities.FeedBack;
 import com.nashtech.assignment.pdh.entities.Products;
+import com.nashtech.assignment.pdh.repositories.CategoryRepository;
+import com.nashtech.assignment.pdh.repositories.FeedBackRepository;
 import com.nashtech.assignment.pdh.repositories.ProductRepository;
 
 @DataJpaTest
@@ -19,12 +23,31 @@ import com.nashtech.assignment.pdh.repositories.ProductRepository;
 public class ProductTest {
 	
 	@Autowired
+	private CategoryRepository CateRe;
+	
+	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
+	private FeedBackRepository backRepository;
+	
 	@Autowired
 	private TestEntityManager entityManager;
 	
 	@Test
 	public void TestProduct() {
+		
+		Categories cate = new Categories();
+		cate.setCategoryName("test2");
+		
+		CateRe.save(cate);
+		
+		FeedBack fBack = new FeedBack();
+		fBack.setFbComment("test");
+		
+		backRepository.save(fBack);
+		
+		
 		Products products = new Products();
 		products.setProName("Test");
 		products.setProPice(50);
