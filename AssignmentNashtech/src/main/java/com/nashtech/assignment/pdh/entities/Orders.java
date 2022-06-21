@@ -38,30 +38,4 @@ public class Orders {
 	@OneToMany(mappedBy = "orders")
 	private Set<OrderDetail>details;
 
-	public Long getOrId() {
-		return orId;
-	}
-
-	public void setOrId(Long orId) {
-		this.orId = orId;
-	}
-
-	public String getOrDate() {
-		return orDate;
-	}
-
-	public void setOrDate(String orDate) {
-		this.orDate = orDate;
-	}
-
-	public String getOrStatus() {
-		return orStatus;
-	}
-
-	public void setOrStatus(String orStatus) {
-		this.orStatus = orStatus;
-	}
-	
-	
-	
 }

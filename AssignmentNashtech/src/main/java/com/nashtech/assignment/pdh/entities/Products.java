@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,8 +49,8 @@ public class Products {
 	//private Long categoryId;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
-	private Categories categories;
+	@JoinColumn(name = "supCateId")
+	private SupCategories supCategories;
 	
 	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)
 	private Set<FeedBack> feedBacks;
@@ -58,60 +58,7 @@ public class Products {
 	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL)
 	private Set<OrderDetail>orderDetails;
 	
-
-	public Long getProId() {
-		return proId;
-	}
-
-	public void setProId(Long proId) {
-		this.proId = proId;
-	}
-
-	public String getProName() {
-		return proName;
-	}
-
-	public void setProName(String proName) {
-		this.proName = proName;
-	}
-
-	public float getProPice() {
-		return proPice;
-	}
-
-	public void setProPice(float proPice) {
-		this.proPice = proPice;
-	}
-
-	public String getProImage() {
-		return proImage;
-	}
-
-	public void setProImage(String proImage) {
-		this.proImage = proImage;
-	}
-
-	public String getProDiscreption() {
-		return proDiscreption;
-	}
-
-	public void setProDiscreption(String proDiscreption) {
-		this.proDiscreption = proDiscreption;
-	}
-
-	public int getProQuantity() {
-		return proQuantity;
-	}
-
-	public void setProQuantity(int proQuantity) {
-		this.proQuantity = proQuantity;
-	}
-
-	/*
-	 * public Long getCategoryId() { return categoryId; }
-	 * 
-	 * public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
-	 */
+	
 	
 	
 }

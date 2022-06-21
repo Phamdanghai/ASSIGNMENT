@@ -48,53 +48,5 @@ public class OrderDetail {
 	@JoinColumn(name = "orId")
 	private Orders orders;
 
-	public Long getOrdId() {
-		return ordId;
-	}
-
-	public void setOrdId(Long ordId) {
-		this.ordId = ordId;
-	}
-
-	public String getOrdName() {
-		return ordName;
-	}
-
-	public void setOrdName(String ordName) {
-		this.ordName = ordName;
-	}
-
-	public String getOrdPhone() {
-		return ordPhone;
-	}
-
-	public void setOrdPhone(String ordPhone) {
-		this.ordPhone = ordPhone;
-	}
-
-	public String getOrdDate() {
-		return ordDate;
-	}
-
-	public void setOrdDate(String ordDate) {
-		this.ordDate = ordDate;
-	}
-
-	public float getOrdPrice() {
-		return ordPrice;
-	}
-
-	public void setOrdPrice(float ordPrice) {
-		this.ordPrice = ordPrice;
-	}
-
-	public int getOrdQuantity() {
-		return ordQuantity;
-	}
-
-	public void setOrdQuantity(int ordQuantity) {
-		this.ordQuantity = ordQuantity;
-	}
-	
 	
 }

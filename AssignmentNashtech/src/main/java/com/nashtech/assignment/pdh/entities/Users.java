@@ -31,9 +31,6 @@ public class Users {
 	private Long userId;
 	
 	@Column(nullable = false,length = 200)
-	private String userName;
-	
-	@Column(nullable = false,length = 200)
 	private String userPassword;
 	
 	@Column(length = 350)
@@ -55,39 +52,5 @@ public class Users {
 	
 	@OneToOne(mappedBy = "users",cascade = CascadeType.ALL)
 	private Information information;
-
-	public Long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(Long userID) {
-		this.userID = userID;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-	
 	
 }

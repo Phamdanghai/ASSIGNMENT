@@ -16,7 +16,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "categoties")
+@Table(name = "categories")
 @Getter
 @Setter
 public class Categories {
@@ -32,23 +32,6 @@ public class Categories {
 	private String categoryName;
 	
 	@OneToMany(mappedBy = "categories",cascade = CascadeType.ALL)
-	private Set<Products> products;
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	
+	private Set<SupCategories> supCategories;
 	
 }

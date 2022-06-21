@@ -37,10 +37,10 @@ public class ProductTest {
 	@Test
 	public void TestProduct() {
 		
-		Categories cate = new Categories();
-		cate.setCategoryName("test2");
-		
-		CateRe.save(cate);
+//		Categories cate = new Categories();
+//		cate.setCategoryName("test2");
+//		
+//		CateRe.save(cate);
 		
 		FeedBack fBack = new FeedBack();
 		fBack.setFbComment("test");

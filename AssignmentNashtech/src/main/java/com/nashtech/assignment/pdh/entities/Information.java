@@ -33,41 +33,11 @@ public class Information {
 	@Column(length = 300)
 	private String intAddress;
 	
+	@Column(nullable = false,length = 200)
+	private String userName;
+	
 	@OneToOne
 	@JoinColumn(name = "userId")
 	private Users users;
 
-	public Long getInfId() {
-		return infId;
-	}
-
-	public void setInfId(Long infId) {
-		this.infId = infId;
-	}
-
-	public String getInfFullName() {
-		return infFullName;
-	}
-
-	public void setInfFullName(String infFullName) {
-		this.infFullName = infFullName;
-	}
-
-	public String getInfPhone() {
-		return infPhone;
-	}
-
-	public void setInfPhone(String infPhone) {
-		this.infPhone = infPhone;
-	}
-
-	public String getIntAddress() {
-		return intAddress;
-	}
-
-	public void setIntAddress(String intAddress) {
-		this.intAddress = intAddress;
-	}
-	
-	
 }

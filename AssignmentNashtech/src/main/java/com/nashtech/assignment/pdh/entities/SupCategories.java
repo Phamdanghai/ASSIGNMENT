@@ -1,5 +1,9 @@
 package com.nashtech.assignment.pdh.entities;
 
+import java.util.Set;
+
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,32 +11,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "feedback")
+@Table(name = "supCategories")
 @Getter
 @Setter
-public class FeedBack {
-	public FeedBack() {
+public class SupCategories {
+	public SupCategories() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long fbId;
+	private Long supCateId;
 	
 	@Column
-	private String fbComment;
+	private String supCateName;
+	
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
-	private Users users;
+	@JoinColumn(name = "categoryId")
+	private Categories categories;
 	
-	@ManyToOne
-	@JoinColumn(name = "proId")
-	private Products products;
+	@OneToMany(mappedBy = "supCategories",cascade = CascadeType.ALL)
+	private Set<Products> products;
 	
+
 }
