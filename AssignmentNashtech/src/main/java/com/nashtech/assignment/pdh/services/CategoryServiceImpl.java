@@ -9,7 +9,7 @@ import com.nashtech.assignment.pdh.entities.Categories;
 import com.nashtech.assignment.pdh.repositories.CategoryRepository;
 
 @Service
-public class CategoryServiceImpl implements ICategory{
+public class CategoryServiceImpl implements ICategoryService{
 	
 	@Autowired
 	private CategoryRepository categoryRepository;

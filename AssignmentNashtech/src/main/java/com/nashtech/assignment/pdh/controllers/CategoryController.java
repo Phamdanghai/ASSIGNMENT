@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nashtech.assignment.pdh.entities.Categories;
-import com.nashtech.assignment.pdh.services.ICategory;
+import com.nashtech.assignment.pdh.services.ICategoryService;
 
 @RestController
 @RequestMapping("/cate")
-public class UserController {
+public class CategoryController {
 
 	@GetMapping("/")
 	public String test() {
@@ -27,7 +27,7 @@ public class UserController {
 	}
 
 	@Autowired
-	private ICategory iCategory;
+	private ICategoryService iCategory;
 
 	// add cate
 	@PostMapping("/add")

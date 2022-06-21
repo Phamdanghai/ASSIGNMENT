@@ -5,7 +5,7 @@ import java.util.List;
 import com.nashtech.assignment.pdh.entities.Categories;
 
 
-public interface ICategory {
+public interface ICategoryService {
 	//add category
 	public Categories addCate(Categories categories);
 	

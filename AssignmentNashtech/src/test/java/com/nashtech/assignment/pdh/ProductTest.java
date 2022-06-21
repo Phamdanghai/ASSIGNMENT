@@ -42,24 +42,24 @@ public class ProductTest {
 //		
 //		CateRe.save(cate);
 		
-		FeedBack fBack = new FeedBack();
-		fBack.setFbComment("test");
-		
-		backRepository.save(fBack);
-		
-		
-		Products products = new Products();
-		products.setProName("Test");
-		products.setProPice(50);
-		products.setProImage("Test");
-		products.setProDiscreption("test");
-		products.setProQuantity(50);
-		
-		Products saveProducts = repository.save(products);
-		
-		Products exitProducts = entityManager.find(Products.class, saveProducts.getProId());
-		
-		assertThat(exitProducts.getProName()).isEqualTo(products.getProName());
+//		FeedBack fBack = new FeedBack();
+//		fBack.setFbComment("test");
+//		
+//		backRepository.save(fBack);
+//		
+//		
+//		Products products = new Products();
+//		products.setProName("Test");
+//		products.setProPice(50);
+//		products.setProImage("Test");
+//		products.setProDiscreption("test");
+//		products.setProQuantity(50);
+//		
+//		Products saveProducts = repository.save(products);
+//		
+//		Products exitProducts = entityManager.find(Products.class, saveProducts.getProId());
+//		
+//		assertThat(exitProducts.getProName()).isEqualTo(products.getProName());
 				
 	}
 }
