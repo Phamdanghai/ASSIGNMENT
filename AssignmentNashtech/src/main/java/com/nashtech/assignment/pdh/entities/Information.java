@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +34,8 @@ public class Information {
 	@Column(length = 300)
 	private String intAddress;
 	
-	@Column(nullable = false,length = 200)
+	@NotBlank
+	@Column(nullable = false, length = 200)
 	private String userName;
 	
 	@OneToOne

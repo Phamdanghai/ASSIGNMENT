@@ -2,6 +2,8 @@ package com.nashtech.assignment.pdh.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class CategoryServiceImpl implements ICategoryService{
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public Categories addCate(Categories categories) {
+	public Categories addCate(@Valid Categories categories) {
 		if(categories!=null) {
 			return categoryRepository.save(categories);
 		}
@@ -25,6 +27,7 @@ public class CategoryServiceImpl implements ICategoryService{
 	@Override
 	public Categories updateCategories(long id, Categories categories) {
 		if(categories!=null) {
+			@SuppressWarnings("deprecation")
 			Categories categories1 = categoryRepository.getById(id);
 			if(categories1!=null) {
 				categories1.setCategoryName(categories.getCategoryName());

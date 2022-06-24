@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,9 +40,11 @@ public class SupCategories {
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
+	@JsonIgnore
 	private Categories categories;
 	
 	@OneToMany(mappedBy = "supCategories",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Products> products;
 	
 

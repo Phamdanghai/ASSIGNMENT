@@ -11,18 +11,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "categories")
 @Getter
 @Setter
 public class Categories {
-	public Categories() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +37,7 @@ public class Categories {
 	private String categoryName;
 	
 	@OneToMany(mappedBy = "categories",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<SupCategories> supCategories;
 	
 }
