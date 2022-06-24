@@ -38,51 +38,51 @@ public class CategoryController {
 
 	private ICategoryService iCategoryService;
 	
-	@Autowired
-	private ModelMapper mapper;
-	
-	public CategoryController(ICategoryService categoryService) {
-		super();
-		this.iCategoryService = categoryService;
-	}
-
-	// add cate
-	@PostMapping("/")
-	public ResponseEntity<CategoryDto> addCategories(@RequestBody@Valid CategoryDto cateDto) {
-		Categories categoriesRequest = mapper.map(cateDto, Categories.class);
-		
-		Categories categories = iCategoryService.addCate(categoriesRequest);
-		
-		CategoryDto categoryResponse = mapper.map(categories, CategoryDto.class);
-		return new ResponseEntity<CategoryDto>(categoryResponse,HttpStatus.CREATED);
-	}
-
-	// add cate
-	@PutMapping("/{id}")
-	public ResponseEntity<CategoryDto> updateCategories(@PathVariable long id, @RequestBody @Valid CategoryDto cateDto){
-		//Convert DTO to Entity'
-		Categories categoryRequest = mapper.map(cateDto, Categories.class);
-		
-		Categories categories = iCategoryService.updateCategories(id, categoryRequest);
-		
-		//entity to DTO
-		CategoryDto categoryResponse = mapper.map(categories, CategoryDto.class);
-		
-		return ResponseEntity.ok().body(categoryResponse);
-	}
-
-	//delete cate
-	@DeleteMapping("/{id}")
-	private boolean deleteCategory(@PathVariable("id")long id) {
-		return iCategoryService.deleteCategory(id);
-	}
+//	@Autowired
+//	private ModelMapper mapper;
+//	
+//	public CategoryController(ICategoryService categoryService) {
+//		super();
+//		this.iCategoryService = categoryService;
+//	}
+//
+//	// add cate
+//	@PostMapping("/")
+//	public ResponseEntity<CategoryDto> addCategories(@RequestBody@Valid CategoryDto cateDto) {
+//		Categories categoriesRequest = mapper.map(cateDto, Categories.class);
+//		
+//		Categories categories = iCategoryService.addCate(categoriesRequest);
+//		
+//		CategoryDto categoryResponse = mapper.map(categories, CategoryDto.class);
+//		return new ResponseEntity<CategoryDto>(categoryResponse,HttpStatus.CREATED);
+//	}
+//
+//	// add cate
+//	@PutMapping("/{id}")
+//	public ResponseEntity<CategoryDto> updateCategories(@PathVariable long id, @RequestBody @Valid CategoryDto cateDto){
+//		//Convert DTO to Entity'
+//		Categories categoryRequest = mapper.map(cateDto, Categories.class);
+//		
+//		Categories categories = iCategoryService.updateCategories(id, categoryRequest);
+//		
+//		//entity to DTO
+//		CategoryDto categoryResponse = mapper.map(categories, CategoryDto.class);
+//		
+//		return ResponseEntity.ok().body(categoryResponse);
+//	}
+//
+//	//delete cate
+//	@DeleteMapping("/{id}")
+//	private boolean deleteCategory(@PathVariable("id")long id) {
+//		return iCategoryService.deleteCategory(id);
+//	}
 	
 	@GetMapping("/")
-	private List<CategoryDto> list() {
+	private List<Categories> list() {
 
-		return iCategoryService.getAllCategories().stream().map(cate -> mapper.map(cate, CategoryDto.class))
-				.collect(Collectors.toList());
-//		return iCategoryService.getAllCategories();
+//		return iCategoryService.getAllCategories().stream().map(cate -> mapper.map(cate, CategoryDto.class))
+//				.collect(Collectors.toList());
+		return iCategoryService.getAllCategories();
 	}
 	
 	
