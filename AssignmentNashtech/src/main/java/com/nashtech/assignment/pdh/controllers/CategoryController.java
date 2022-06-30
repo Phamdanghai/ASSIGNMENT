@@ -1,6 +1,7 @@
 package com.nashtech.assignment.pdh.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -24,18 +25,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nashtech.assignment.pdh.dto.CategoryDto;
 import com.nashtech.assignment.pdh.entities.Categories;
+import com.nashtech.assignment.pdh.entities.SupCategories;
 import com.nashtech.assignment.pdh.exception.ResourceNotFoundException;
 import com.nashtech.assignment.pdh.services.ICategoryService;
 
 @RestController
-@RequestMapping("/cate")
+@RequestMapping("/category")
 public class CategoryController {
 
 //	@GetMapping("/")
 //	public String test() {
 //		return "Test";
 //	}
-
+	@Autowired
 	private ICategoryService iCategoryService;
 	
 //	@Autowired
@@ -77,12 +79,49 @@ public class CategoryController {
 //		return iCategoryService.deleteCategory(id);
 //	}
 	
-	@GetMapping("/")
-	private List<Categories> list() {
+//	@GetMapping("/")
+//	private List<Categories> list() {
+//
+////		return iCategoryService.getAllCategories().stream().map(cate -> mapper.map(cate, CategoryDto.class))
+////				.collect(Collectors.toList());
+//		return iCategoryService.getAllCategories();
+//	}
+	
+	@PostMapping("/")
+	public ResponseEntity<Categories> addCategories(@RequestBody Categories categories) {
+//		return iCategoryService.addCategories(categories);
+		return new ResponseEntity<>(iCategoryService.addCategories(categories),HttpStatus.OK);
+	}
 
-//		return iCategoryService.getAllCategories().stream().map(cate -> mapper.map(cate, CategoryDto.class))
-//				.collect(Collectors.toList());
-		return iCategoryService.getAllCategories();
+	// add cate
+	@PutMapping("/{id}")
+	public ResponseEntity<Categories> updateCategories(@PathVariable("id") long id, @RequestBody Categories categories) {
+		Optional<Categories> categoryOptional= iCategoryService.findCategoriesById(id);
+		
+		return categoryOptional.map(categoryById ->{
+			categories.setCategoryId(categoryById.getCategoryId());
+			return new ResponseEntity<>(iCategoryService.updateCategories(id, categories), HttpStatus.OK);
+		}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		
+//		return iCategoryService.updateCategories(id, categories);
+	}
+
+	// delete cate
+	@DeleteMapping("/{id}")
+	private ResponseEntity<Categories> deleteCategory(@PathVariable long id) {
+		Optional<Categories> categoryOptional = iCategoryService.findCategoriesById(id);
+        return categoryOptional.map(category -> {
+            iCategoryService.deleteCategory(id);
+            return new ResponseEntity<>(category, HttpStatus.OK);
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//		return iCategoryService.deleteCategory(id);
+	}
+
+	@GetMapping("/")
+	private ResponseEntity<List<Categories>> listCategory() {
+
+		return new ResponseEntity<>(iCategoryService.getAllCategories(),HttpStatus.OK);
+//		return iCategoryService.getAllCategories();
 	}
 	
 	

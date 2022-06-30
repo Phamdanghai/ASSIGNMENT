@@ -1,4 +1,4 @@
-package com.nashtech.assignment.pdh.services;
+package com.nashtech.assignment.pdh.services.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nashtech.assignment.pdh.entities.Products;
 import com.nashtech.assignment.pdh.repositories.ProductRepository;
+import com.nashtech.assignment.pdh.services.IProductService;
 
 @Service
 public class ProductServiceImpl implements IProductService{

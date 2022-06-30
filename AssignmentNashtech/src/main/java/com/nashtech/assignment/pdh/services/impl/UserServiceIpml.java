@@ -1,4 +1,4 @@
-package com.nashtech.assignment.pdh.services;
+package com.nashtech.assignment.pdh.services.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nashtech.assignment.pdh.entities.Information;
 import com.nashtech.assignment.pdh.entities.Users;
 import com.nashtech.assignment.pdh.repositories.UserRepository;
+import com.nashtech.assignment.pdh.services.IUserService;
 
 public class UserServiceIpml implements IUserService {
 
