@@ -6,4 +6,5 @@ import com.nashtech.assignment.pdh.entities.Products;
 
 public interface IProductService {
 	public List<Products> getAllProducts();
+	
 }

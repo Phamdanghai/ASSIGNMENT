@@ -19,7 +19,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,16 +27,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Categories {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long categoryId;
-	
+
 	@Column(length = 250)
 	private String categoryName;
-	
-	@OneToMany(mappedBy = "categories",cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<SupCategories> supCategories;
-	
+
 }

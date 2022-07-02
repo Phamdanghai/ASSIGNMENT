@@ -24,7 +24,8 @@ public class SupCategoryServiceImpl implements ISupCategoryService {
 
 	@Override
 	public SupCategories updateSupCategories(long id, SupCategories supCategories) {
-		if (supCategories != null) {
+		boolean exID = supCategoryRepository.existsById(id);
+		if (exID) {
 			@SuppressWarnings("deprecation")
 			SupCategories supCategoriesById = supCategoryRepository.getById(id);
 			if (supCategoriesById != null) {
@@ -32,7 +33,7 @@ public class SupCategoryServiceImpl implements ISupCategoryService {
 				return supCategoryRepository.save(supCategoriesById);
 			}
 		}
-		return null;
+		return supCategoryRepository.save(supCategories);
 	}
 
 	@Override
