@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class SupCategories {
 
 	@Id
@@ -35,9 +37,9 @@ public class SupCategories {
 	@Column
 	private String supCateName;
 
-	@ManyToOne
-	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
-	private Categories categories;
+//	@ManyToOne
+//	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
+//	private Categories categories;
 
 	@OneToMany(mappedBy = "supCategories", cascade = CascadeType.ALL)
 	@JsonIgnore

@@ -13,17 +13,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "products")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Products {
-	public Products() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,10 +54,16 @@ public class Products {
 	@JoinColumn(name = "supCateId")
 	private SupCategories supCategories;
 
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Categories categories;
+
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	private Set<FeedBack> feedBacks;
 
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails;
 
+	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+	private Set<CartItem> cartItems;
 }

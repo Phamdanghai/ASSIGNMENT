@@ -3,18 +3,18 @@ package com.nashtech.assignment.pdh.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
-    @NotBlank
-    private String userName;
+	@NotBlank
+	private String email;
 
-    @NotBlank
-    private String password;
+	@NotBlank
+	private String password;
 
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -25,5 +25,4 @@ public class LoginRequest {
 		this.password = password;
 	}
 
-    
 }

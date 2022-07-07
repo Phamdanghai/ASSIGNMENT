@@ -19,6 +19,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,8 +30,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@NamedQueries({
-    @NamedQuery(name = "Users.getUserEmail", query = "SELECT a FROM Users a where a.userEmail = :email")})
+@Builder
+@NamedQueries({ @NamedQuery(name = "Users.getUserEmail", query = "SELECT a FROM Users a where a.userEmail = :email") })
 public class Users {
 
 	@Id
@@ -46,11 +47,7 @@ public class Users {
 	@Email
 	private String userEmail;
 
-	/*
-	 * @Column private Long roleId;
-	 */
-
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "roleId")
 	private Roles roles;
 
@@ -62,6 +59,9 @@ public class Users {
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	private Information information;
+
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	private Set<CartItem> cartItems;
 
 	public Users(String email, String password) {
 		this.userEmail = email;

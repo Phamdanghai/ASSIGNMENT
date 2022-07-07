@@ -1,7 +1,5 @@
 package com.nashtech.assignment.pdh.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,43 +10,34 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.bytebuddy.utility.nullability.MaybeNull;
 
 @Entity
-@Table(name = "orderdetail")
-@Getter
+@Table(name = "cartItem")
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetail implements Serializable {
+@Builder
+public class CartItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ordId;
+	private Long cartItemId;
 
 	@Column
-	private String ordName;
-
-	@Column
-	private String ordPhone;
-
-	@Column
-	private String ordDate;
-
-	@Column
-	private float ordPrice;
-
-	@Column
-	private int ordQuantity;
+	private int quantity;
 
 	@ManyToOne
 	@JoinColumn(name = "proId")
 	private Products products;
 
 	@ManyToOne
-	@JoinColumn(name = "orId")
-	private Orders orders;
+	@JoinColumn(name = "userId")
+	private Users users;
 
 }

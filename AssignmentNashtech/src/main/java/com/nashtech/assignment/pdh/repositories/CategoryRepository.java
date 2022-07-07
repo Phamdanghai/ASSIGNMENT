@@ -8,4 +8,6 @@ import com.nashtech.assignment.pdh.entities.Categories;
 @Repository
 public interface CategoryRepository extends JpaRepository<Categories, Long> {
 
+	Categories findCategoryByCategoryName(String categoryName);
+
 }

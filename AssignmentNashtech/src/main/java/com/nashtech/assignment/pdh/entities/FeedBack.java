@@ -9,17 +9,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "feedback")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class FeedBack {
-	public FeedBack() {
-		// TODO Auto-generated constructor stub
-	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long fbId;
