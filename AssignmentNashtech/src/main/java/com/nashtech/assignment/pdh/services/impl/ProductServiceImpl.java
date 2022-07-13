@@ -38,6 +38,14 @@ public class ProductServiceImpl implements IProductService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	public ProductServiceImpl(ProductRepository productRepository2, CategoryRepository categoryRepository2,
+			SupCategoryRepository supCategoryRepository2, ModelMapper modelMapper2) {
+		this.productRepository = productRepository2;
+		this.categoryRepository = categoryRepository2;
+		this.supCategoryRepository = supCategoryRepository2;
+		this.modelMapper = modelMapper2;
+	}
+
 	@Override
 	public ResponseEntity<?> addProduct(ProductDTO productDTO) {
 		Optional<Categories> categoryOptional = categoryRepository.findById(productDTO.getCategories().getCategoryId());
@@ -46,6 +54,9 @@ public class ProductServiceImpl implements IProductService {
 
 		if (!categoryOptional.isPresent() && !supCategoryOptional.isPresent()) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Category not found"));
+		}
+		if (!supCategoryOptional.isPresent() && !supCategoryOptional.isPresent()) {
+			return ResponseEntity.badRequest().body(new MessageResponse("SubCategory not found"));
 		}
 
 		productRepository.save(modelMapper.map(productDTO, Products.class));
@@ -107,7 +118,7 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public ProductDTO findByIdProduct(long id) throws ResourceNotFoundException {
 		Optional<Products> optional = productRepository.findById(id);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			Products product = optional.get();
 			return modelMapper.map(product, ProductDTO.class);
 		}

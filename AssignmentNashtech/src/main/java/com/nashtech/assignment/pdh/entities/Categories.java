@@ -26,7 +26,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class Categories {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long categoryId;

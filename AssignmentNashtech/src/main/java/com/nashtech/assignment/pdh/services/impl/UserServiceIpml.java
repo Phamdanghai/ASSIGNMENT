@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.nashtech.assignment.pdh.dto.OrderDTO;
@@ -25,10 +26,13 @@ import com.nashtech.assignment.pdh.services.IUserService;
 public class UserServiceIpml implements IUserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	UserRepository userRepository;
 
 	@Autowired
-	private ModelMapper modelMapper;
+	ModelMapper modelMapper;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public ResponseEntity<?> updateAccount(long id, UserUpdateDTO userUpdateDTO) throws ResourceNotFoundException {
@@ -37,7 +41,7 @@ public class UserServiceIpml implements IUserService {
 			throw new ResourceNotFoundException("Account is not found");
 		}
 		Users account = optional.get();
-		account.setUserPassword(userUpdateDTO.getPassword());
+		account.setUserPassword(passwordEncoder.encode(userUpdateDTO.getPassword()));
 		userRepository.save(account);
 
 		return ResponseEntity.ok(new MessageResponse("Update password successfully"));

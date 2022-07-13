@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,21 +36,24 @@ import com.nashtech.assignment.pdh.security.service.UserDetailsImpl;
 import com.nashtech.assignment.pdh.services.IAuthService;
 
 @EnableAutoConfiguration
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:3000")
+
 public class AuthController {
 
 	@Autowired
 	IAuthService iAuthService;
 
 	@PostMapping("/signin")
+//	@PreAuthorize("hasRole('Admin') or hasRole('Customer')")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		return iAuthService.authenticateUser(loginRequest);
 	}
 
 	@PostMapping("/signup")
+//	@PreAuthorize("hasRole('Admin') or hasRole('Customer')")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest)
 			throws ResourceNotFoundException {
 		return iAuthService.signup(signUpRequest);

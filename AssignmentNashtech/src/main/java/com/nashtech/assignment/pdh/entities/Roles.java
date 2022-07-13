@@ -28,7 +28,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class Roles {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long roleId;

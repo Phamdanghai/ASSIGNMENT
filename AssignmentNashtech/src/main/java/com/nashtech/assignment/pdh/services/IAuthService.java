@@ -1,5 +1,8 @@
 package com.nashtech.assignment.pdh.services;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +15,6 @@ public interface IAuthService {
 	public ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
 
 	public ResponseEntity<?> signup(SignupRequest signUpRequest) throws ResourceNotFoundException;
+
+//	ResponseEntity<?> logoutUser(HttpServletRequest request, HttpServletResponse response);
 }

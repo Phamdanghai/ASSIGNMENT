@@ -1,6 +1,7 @@
 package com.nashtech.assignment.pdh.services.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.nashtech.assignment.pdh.dto.CartItemDTO;
 import com.nashtech.assignment.pdh.dto.OrderDTO;
 import com.nashtech.assignment.pdh.dto.OrderDetailDTO;
 import com.nashtech.assignment.pdh.entities.OrderDetail;
@@ -20,6 +22,7 @@ import com.nashtech.assignment.pdh.repositories.OrderDetailRepository;
 import com.nashtech.assignment.pdh.repositories.OrderRepository;
 import com.nashtech.assignment.pdh.repositories.ProductRepository;
 import com.nashtech.assignment.pdh.response.MessageResponse;
+import com.nashtech.assignment.pdh.services.ICartItemService;
 import com.nashtech.assignment.pdh.services.IOrderService;
 
 @Component
@@ -30,6 +33,7 @@ public class OderServiceImpl implements IOrderService {
 	private OrderDetailRepository orderDetailRepository;
 	private ProductRepository productRepository;
 	private ModelMapper modelMapper;
+	private ICartItemService iCartItemService;
 
 	@Override
 	public OrderDTO findByIdOrder(long id) throws ResourceNotFoundException {
@@ -52,29 +56,21 @@ public class OderServiceImpl implements IOrderService {
 
 	@Override
 	public ResponseEntity<?> addOrder(OrderDTO orderDTO) throws ResourceNotFoundException {
-		Orders order = modelMapper.map(orderDTO, Orders.class);
-		Optional<Orders> optionalOrder = orderRepository.findById(orderDTO.getOrId());
-		if(optionalOrder.isPresent()) {
-			throw new ResourceNotFoundException("Don't add Order");
-		}
-		orderRepository.save(order);
-		List<OrderDetail> listOrderdetails = new ArrayList<>();
-		OrderDetail orderdetails;
-		
-		for(OrderDetailDTO s : orderDTO.getDetails()) {
-			Long idProduct =s.getProducts().getProId();
-			Optional<Products> optionalProduct = productRepository.findById(idProduct);
-			if(!optionalProduct.isPresent()) {
-				throw new ResourceNotFoundException("Product not found");
-			}
-			orderdetails = modelMapper.map(s, OrderDetail.class);
-			orderdetails.setProducts(productRepository.findByIdProduct(idProduct));
+		Collection<CartItemDTO> cartItemDTO = iCartItemService.getCartByIdAccount(orderDTO.getUsers().getUserId());
+		if(cartItemDTO.isEmpty())
+			throw new ResourceNotFoundException("add order not success");
+		Orders order = orderRepository.save(modelMapper.map(orderDTO, Orders.class));
+		List<OrderDetail> listOrderDetails = new ArrayList<>();
+		for (CartItemDTO cart : cartItemDTO) {
+			OrderDetail orderdetails = new OrderDetail();
+			orderdetails.setOrdQuantity(cart.getQuantity());
+			orderdetails.setProducts(modelMapper.map(cart.getProducts(), Products.class));
 			orderdetails.setOrders(order);
-			listOrderdetails.add(orderdetails);
+			listOrderDetails.add(orderdetails);
 		}
-		orderDetailRepository.saveAll(listOrderdetails);
-		return ResponseEntity.ok(new MessageResponse("The order was added successfully"));
+			orderDetailRepository.saveAll(listOrderDetails);
+			iCartItemService.deleteCart(orderDTO.getUsers().getUserId());
+			return ResponseEntity.ok(new MessageResponse("The order was added successfully"));
 
 	}
-
 }

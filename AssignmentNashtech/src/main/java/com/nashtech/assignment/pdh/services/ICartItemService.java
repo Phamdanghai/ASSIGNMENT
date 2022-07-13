@@ -1,5 +1,7 @@
 package com.nashtech.assignment.pdh.services;
 
+import java.util.Collection;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,7 @@ import com.nashtech.assignment.pdh.exception.ResourceNotFoundException;
 @Service
 public interface ICartItemService {
 
-	public ResponseEntity<?> getCartByIdAccount(Long userId) throws ResourceNotFoundException;
+	public Collection<CartItemDTO> getCartByIdAccount(Long userId) throws ResourceNotFoundException;
 
 	public ResponseEntity<?> addCart(CartItemDTO cartItemDTO) throws ResourceNotFoundException;
 

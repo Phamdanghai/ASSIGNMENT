@@ -24,12 +24,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class Information {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long infId;
 
-	@Column(nullable = false, length = 250)
+	@Column( length = 250)
 	private String infFullName;
 
 	@Column(length = 15)

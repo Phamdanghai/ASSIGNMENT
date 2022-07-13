@@ -38,7 +38,7 @@ public class CartItemServiceImpl implements ICartItemService {
 	ModelMapper modelMapper;
 
 	@Override
-	public ResponseEntity<?> getCartByIdAccount(Long userId) throws ResourceNotFoundException {
+	public Collection<CartItemDTO> getCartByIdAccount(Long userId) throws ResourceNotFoundException {
 		Optional<Users> optionalAccount = userRepository.findById(userId);
 		if (!optionalAccount.isPresent()) {
 			throw new ResourceNotFoundException("Account not found");
@@ -46,7 +46,7 @@ public class CartItemServiceImpl implements ICartItemService {
 		List<CartItem> list = userRepository.findCartByIdAccount(userId);
 		List<CartItemDTO> dto = new ArrayList<CartItemDTO>();
 		list.forEach(c -> dto.add(modelMapper.map(c, CartItemDTO.class)));
-		return ResponseEntity.ok(dto);
+		return dto;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import net.bytebuddy.utility.nullability.MaybeNull;
 @NoArgsConstructor
 @Builder
 public class CartItem {
-
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cartItemId;

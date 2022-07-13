@@ -28,6 +28,11 @@ public class CategoryServiceImpl implements ICategoryService {
 	@Autowired
 	ModelMapper modelMapper;
 
+	public CategoryServiceImpl(CategoryRepository categoryRepository2, ModelMapper modelMapper2) {
+		this.categoryRepository = categoryRepository2;
+		this.modelMapper = modelMapper2;
+	}
+
 	@Override
 	public CategoryDTO addCategories(@Valid CategoryDTO categoryDTO) {
 		Categories categories = categoryRepository.save(modelMapper.map(categoryDTO, Categories.class));
@@ -41,6 +46,7 @@ public class CategoryServiceImpl implements ICategoryService {
 			Categories categories = categoryOptional.get();
 			modelMapper.map(categoryDTO, categories);
 			categories = categoryRepository.save(categories);
+
 			return modelMapper.map(categories, CategoryDTO.class);
 		}
 		throw new ResourceNotFoundException("Category not found");
@@ -73,7 +79,7 @@ public class CategoryServiceImpl implements ICategoryService {
 //				.orElseThrow(() -> new ResourceNotFoundException("Category not exist with id: " + id));
 
 //		return categoryRepository.save(categories);
-		return categoryRepository.getById(id);
+		return categoryRepository.findCategoryByCategoryId(id);
 	}
 
 }

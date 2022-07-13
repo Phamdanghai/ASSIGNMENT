@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +29,7 @@ import com.nashtech.assignment.pdh.services.IProductService;
 import com.nashtech.assignment.pdh.services.ISupCategoryService;
 
 @RestController
-@RequestMapping("/supcategory")
+@RequestMapping("/api/supcategory")
 public class SupCategoryController {
 
 	@Autowired
@@ -36,12 +37,14 @@ public class SupCategoryController {
 
 	// add cate
 	@PostMapping("/")
+	@PreAuthorize("hasAuthority('Admin')")
 	public SupCategoryDTO addCategories(@RequestBody SupCategoryDTO supCategoryDTO) {
 		return iSupCategoryService.addSupCategories(supCategoryDTO);
 	}
 
 	// add cate
 	@PutMapping("/")
+	@PreAuthorize("hasAuthority('Admin')")
 	public ResponseEntity<?> updateCategories(@RequestParam long id, @RequestBody SupCategoryDTO supCategoryDTO)
 			throws ResourceNotFoundException {
 		iSupCategoryService.updateSupCategories(id, supCategoryDTO);
@@ -50,6 +53,7 @@ public class SupCategoryController {
 
 	// delete cate
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('Admin')")
 	public ResponseEntity<?> deleteCategory(@PathVariable long id) throws ResourceNotFoundException {
 		iSupCategoryService.deleteSupCategory(id);
 		return ResponseEntity.ok().body(String.format("Delete supCategory successfully!"));
@@ -57,10 +61,13 @@ public class SupCategoryController {
 	}
 
 	@GetMapping("/")
+	@PreAuthorize("hasAuthority('Admin')")
 	public List<SupCategoryDTO> list() {
 		return iSupCategoryService.getAllSupCategories();
 	}
 
+	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('Customer') or hasAuthority('Admin')")
 	public ResponseEntity<?> getSupCategoryById(@PathVariable Long id) throws ResourceNotFoundException {
 		iSupCategoryService.getSupCategoriesById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(String.format("List category successfully"));

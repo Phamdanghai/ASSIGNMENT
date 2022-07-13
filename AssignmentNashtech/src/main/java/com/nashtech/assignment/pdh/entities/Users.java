@@ -33,7 +33,8 @@ import lombok.Setter;
 @Builder
 @NamedQueries({ @NamedQuery(name = "Users.getUserEmail", query = "SELECT a FROM Users a where a.userEmail = :email") })
 public class Users {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
